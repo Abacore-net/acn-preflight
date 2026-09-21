@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "acn-preflight"
+version = "0.1.0"
+description = "Python client and MCP server for ACN Preflight"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Abacore"}]
+keywords = ["mcp", "ai-agents", "x402", "github", "preflight"]
+dependencies = ["mcp>=2,<3"]
+
+[project.urls]
+Homepage = "https://preflight.abacore.net"
+Repository = "https://github.com/Abacore-net/acn-preflight"
+
+[project.scripts]
+acn-preflight = "acn_preflight.cli:main"
+acn-preflight-mcp = "acn_preflight.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/acn_preflight"]
