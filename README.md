@@ -12,10 +12,12 @@ The paid tools return the hosted service's HTTP 402 response and order payload u
 
 ## Install
 
+Until the package is published on PyPI, install directly from the canonical GitHub repository:
+
 ```bash
-pip install acn-preflight
-uvx --from acn-preflight acn-preflight --help
-uvx --from acn-preflight acn-preflight-mcp
+pip install "git+https://github.com/Abacore-net/acn-preflight"
+uvx --from "git+https://github.com/Abacore-net/acn-preflight" acn-preflight --help
+uvx --from "git+https://github.com/Abacore-net/acn-preflight" acn-preflight-mcp
 ```
 
 ## CLI
