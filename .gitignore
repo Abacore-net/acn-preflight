@@ -1,8 +1,13 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+*.whl
 dist/
 build/
 .venv/
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
 .coverage
+.python-version
+.DS_Store
