@@ -1,8 +1,34 @@
 # ACN Preflight
 
+[![CI](https://github.com/Abacore-net/acn-preflight/actions/workflows/ci.yml/badge.svg)](https://github.com/Abacore-net/acn-preflight/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Abacore-net/acn-preflight/actions/workflows/codeql.yml/badge.svg)](https://github.com/Abacore-net/acn-preflight/actions/workflows/codeql.yml)
+[![Live Contract](https://github.com/Abacore-net/acn-preflight/actions/workflows/live-contract.yml/badge.svg)](https://github.com/Abacore-net/acn-preflight/actions/workflows/live-contract.yml)
+
 Deterministic preflight checks for AI agents before they spend time, money, or execution effort on external work.
 
 ACN Preflight is the public integration layer for the hosted Abacore Preflight Engine. It exposes the same decision surfaces through Python, CLI, and Model Context Protocol (MCP), while keeping payment configuration, wallet material, deployment controls, and private operational evidence outside the public repository.
+
+## Live proof
+
+The hosted engine publishes machine-readable discovery and trust surfaces that can be inspected without registration or payment.
+
+| Public surface | Purpose |
+| --- | --- |
+| [Health](https://preflight.abacore.net/health) | Minimal public availability check |
+| [OpenAPI 3.1](https://preflight.abacore.net/openapi.json) | HTTP capability contract |
+| [llms.txt](https://preflight.abacore.net/llms.txt) | Agent-readable capability guidance |
+| [Agent Card](https://preflight.abacore.net/.well-known/agent-card.json) | Agent and provider identity |
+| [MCP discovery](https://preflight.abacore.net/.well-known/mcp.json) | Published MCP tools |
+| [x402 manifest](https://preflight.abacore.net/.well-known/x402) | Payment metadata and exposure state |
+| [Readiness proof](https://preflight.abacore.net/agent-readiness.json) | External probe evidence and readiness state |
+
+Reproduce the public verification locally:
+
+~~~bash
+python scripts/verify_live_contract.py
+~~~
+
+The verifier also checks the fail-closed invariant: if x402 reports <code>SAFETY_HOLD</code>, paid resources must not be published. See [Trust and Verification](docs/trust-and-verification.md) for the verification model and its boundaries.
 
 ## What it checks
 
@@ -171,7 +197,7 @@ python -m build
 
 Pull requests run linting, unit tests across supported Python versions, package build checks, and CodeQL analysis.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations and [CHANGELOG.md](CHANGELOG.md) for release notes.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations, [SUPPORT.md](SUPPORT.md) for support channels, and [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## What this repository demonstrates
 
