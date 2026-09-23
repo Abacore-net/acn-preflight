@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "acn-preflight": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/Abacore-net/acn-preflight",
+        "acn-preflight-mcp"
+      ]
+    }
+  }
+}
