@@ -2,11 +2,6 @@ name: Live Contract
 
 on:
   pull_request:
-    paths:
-      - "scripts/verify_live_contract.py"
-      - ".github/workflows/live-contract.yml"
-      - "README.md"
-      - "docs/trust-and-verification.md"
   push:
     branches: [main]
     paths:
