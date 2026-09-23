@@ -3,10 +3,10 @@ from __future__ import annotations
 import io
 import json
 import os
-from typing import Any
 import unittest
-from unittest.mock import patch
 import urllib.error
+from typing import Any
+from unittest.mock import patch
 
 from acn_preflight.client import ACNPreflightClient, ACNPreflightError
 
