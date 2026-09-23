@@ -197,7 +197,7 @@ python -m build
 
 Pull requests run linting, unit tests across supported Python versions, package build checks, and CodeQL analysis.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations, [SUPPORT.md](SUPPORT.md) for support channels, and [CHANGELOG.md](CHANGELOG.md) for release notes.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations, [SUPPORT.md](SUPPORT.md) for support channels, [CHANGELOG.md](CHANGELOG.md) for release notes, and [Releasing](docs/releasing.md) for the Trusted Publishing release path.
 
 ## What this repository demonstrates
 
