@@ -1,0 +1,40 @@
+name: Live Contract
+
+on:
+  pull_request:
+    paths:
+      - "scripts/verify_live_contract.py"
+      - ".github/workflows/live-contract.yml"
+      - "README.md"
+      - "docs/trust-and-verification.md"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify_live_contract.py"
+      - ".github/workflows/live-contract.yml"
+      - "README.md"
+      - "docs/trust-and-verification.md"
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify public contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify live discovery and fail-closed contract
+        run: python scripts/verify_live_contract.py

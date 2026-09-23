@@ -47,10 +47,12 @@ include = [
   "/src",
   "/tests",
   "/examples",
+  "/scripts",
   "/README.md",
   "/LICENSE",
   "/CHANGELOG.md",
   "/SECURITY.md",
+  "/SUPPORT.md",
 ]
 
 [tool.ruff]
