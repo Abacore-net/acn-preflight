@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose an improvement to the public integration layer.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: What integration problem should this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed public behavior
+      description: Describe the smallest useful contract change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility considerations
+      description: Note any impact on Python, CLI, MCP, or hosted response handling.
