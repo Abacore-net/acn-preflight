@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible problem in the public ACN Preflight client or integration.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "0.2.0 or commit SHA"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Integration surface
+      options:
+        - Python
+        - CLI
+        - MCP
+        - Packaging
+        - GitHub Actions
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Remove tokens, private keys, and customer data.
+    validations:
+      required: true
