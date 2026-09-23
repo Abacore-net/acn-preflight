@@ -14,7 +14,9 @@ All notable changes to the public ACN Preflight package are documented here.
 - CI across supported Python versions;
 - CodeQL analysis and Dependabot configuration;
 - contribution and security policies;
-- GitHub issue and pull-request templates.
+- GitHub issue and pull-request templates;
+- reproducible live contract verification and scheduled public contract checks;
+- public trust and verification documentation, support policy, and CODEOWNERS.
 
 ### Changed
 
@@ -22,7 +24,8 @@ All notable changes to the public ACN Preflight package are documented here.
 - MCP tools no longer accept access tokens as model-visible parameters;
 - package metadata now uses an SPDX Apache-2.0 license declaration;
 - Apache-2.0 license file replaced with the canonical full text;
-- CLI treats HTTP 402 as an expected structured response while returning nonzero for other HTTP errors.
+- CLI treats HTTP 402 as an expected structured response while returning nonzero for other HTTP errors;
+- CodeQL workflow upgraded to the current v4 major.
 
 ## 0.1.0 - 2026-09-21
 
