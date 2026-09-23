@@ -34,6 +34,9 @@ jobs:
       - name: Unit tests
         run: python -m unittest discover -s tests -v
 
+      - name: MCP import smoke test
+        run: python -c "from acn_preflight.mcp_server import mcp; print(type(mcp).__name__)"
+
   compatibility:
     name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
@@ -83,4 +86,5 @@ jobs:
       - name: Smoke test CLI
         run: |
           acn-preflight --version
+          python -m acn_preflight --version
           acn-preflight --help
