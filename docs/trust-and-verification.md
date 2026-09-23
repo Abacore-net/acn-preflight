@@ -42,10 +42,11 @@ It checks:
 2. OpenAPI 3.1 capability paths;
 3. llms.txt availability;
 4. Agent Card provider identity;
-5. MCP tool discovery;
-6. readiness proof structure and freshness;
-7. Base and USDC x402 identity;
-8. consistency between x402 state and published paid resources.
+5. MCP manifest discovery and bearer authentication declaration;
+6. live remote MCP tool schemas, including a regression check that paid tools never expose access tokens as model-visible arguments;
+7. readiness proof structure and freshness;
+8. Base and USDC x402 identity;
+9. consistency between x402 state and published paid resources.
 
 The scheduled GitHub Actions workflow runs the same verifier against the public service.
 

@@ -199,11 +199,18 @@ Pull requests run linting, unit tests across supported Python versions, package 
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations, [SUPPORT.md](SUPPORT.md) for support channels, [CHANGELOG.md](CHANGELOG.md) for release notes, and [Releasing](docs/releasing.md) for the Trusted Publishing release path.
 
-## What this repository demonstrates
+## Engineering by Abacore
 
-ACN Preflight is intentionally compact. The public repository is designed to demonstrate an Abacore pattern that is useful for production agent systems: keep the client surface simple and inspectable, keep secrets and commercial state behind a controlled boundary, expose deterministic machine-readable contracts, and make the integration usable through standard developer and agent interfaces.
+ACN Preflight is intentionally compact, but the engineering pattern is production-oriented. It demonstrates how Abacore approaches systems where AI agents interact with external infrastructure and money-bearing workflows:
 
-Built by [Abacore](https://abacore.net).
+- deterministic gates before expensive or irreversible execution;
+- public REST, Python, CLI, MCP, OpenAPI, Agent Card, llms.txt, and x402 surfaces around one capability contract;
+- credentials kept at the transport boundary rather than exposed as model-visible tool arguments;
+- fail-closed payment exposure backed by externally verifiable readiness evidence;
+- CI, CodeQL, dependency automation, typed packaging, reproducible live-contract checks, and OIDC-based release automation;
+- a deliberate boundary between inspectable public integration code and protected commercial runtime state.
+
+For teams building agent infrastructure, machine-to-machine services, MCP integrations, automation, or safety-critical execution workflows, [Abacore](https://abacore.net) provides engineering and integration work around the same principles.
 
 ## License
 

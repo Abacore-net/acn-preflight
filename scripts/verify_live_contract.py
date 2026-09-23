@@ -41,6 +41,39 @@ def _request(base_url: str, path: str, *, timeout: float) -> tuple[int, str, str
         raise VerificationError(f"{path}: request failed: {exc}") from exc
 
 
+def _post_json(
+    base_url: str,
+    path: str,
+    payload: dict[str, Any],
+    *,
+    timeout: float,
+) -> dict[str, Any]:
+    request = urllib.request.Request(
+        base_url.rstrip("/") + path,
+        data=json.dumps(payload).encode("utf-8"),
+        method="POST",
+        headers={
+            "Accept": "application/json, text/event-stream",
+            "Content-Type": "application/json",
+            "User-Agent": "acn-preflight-live-verifier/1.0",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            if int(response.status) != 200:
+                raise VerificationError(f"{path}: expected HTTP 200, got {response.status}")
+            raw = response.read().decode("utf-8", "replace")
+    except urllib.error.URLError as exc:
+        raise VerificationError(f"{path}: request failed: {exc}") from exc
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise VerificationError(f"{path}: response is not valid JSON") from exc
+    if not isinstance(parsed, dict):
+        raise VerificationError(f"{path}: expected a JSON object")
+    return parsed
+
+
 def _json(base_url: str, path: str, *, timeout: float) -> dict[str, Any]:
     status, _, body = _request(base_url, path, timeout=timeout)
     if status != 200:
@@ -93,6 +126,32 @@ def verify(base_url: str, timeout: float) -> dict[str, Any]:
     mcp = _json(base_url, "/.well-known/mcp.json", timeout=timeout)
     if not EXPECTED_MCP_TOOLS.issubset(set(mcp.get("tools") or [])):
         raise VerificationError("mcp.json: expected MCP tools are missing")
+    authentication = mcp.get("authentication") or {}
+    if authentication.get("scheme") != "bearer":
+        raise VerificationError("mcp.json: paid MCP authentication must use bearer transport auth")
+
+    remote_tools = _post_json(
+        base_url,
+        "/mcp",
+        {"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}},
+        timeout=timeout,
+    )
+    tool_rows = ((remote_tools.get("result") or {}).get("tools") or [])
+    tools_by_name = {
+        row.get("name"): row
+        for row in tool_rows
+        if isinstance(row, dict) and isinstance(row.get("name"), str)
+    }
+    if not EXPECTED_MCP_TOOLS.issubset(tools_by_name):
+        raise VerificationError("/mcp tools/list: expected tools are missing")
+    for name in ("repo_contribution_readiness", "payment_preflight"):
+        schema = (tools_by_name[name].get("inputSchema") or {})
+        required = set(schema.get("required") or [])
+        properties = set((schema.get("properties") or {}).keys())
+        if "access_token" in required or "access_token" in properties:
+            raise VerificationError(
+                f"/mcp tools/list: {name} exposes access_token to the model-visible schema"
+            )
 
     readiness = _json(base_url, "/agent-readiness.json", timeout=timeout)
     if readiness.get("status") not in {"PASS", "FAIL"}:
@@ -115,7 +174,13 @@ def verify(base_url: str, timeout: float) -> dict[str, Any]:
         raise VerificationError("x402: unexpected settlement asset")
 
     payment_state = x402.get("payment_state")
-    resources = set(x402.get("resources") or [])
+    resource_rows = x402.get("resources") or []
+    resources = {
+        row if isinstance(row, str) else row.get("path")
+        for row in resource_rows
+        if isinstance(row, (str, dict))
+    }
+    resources.discard(None)
     if payment_state == "ACTIVE":
         if readiness.get("status") != "PASS":
             raise VerificationError("x402: ACTIVE requires a PASS readiness proof")
@@ -133,6 +198,7 @@ def verify(base_url: str, timeout: float) -> dict[str, Any]:
         "service": root.get("service"),
         "openapi": openapi.get("openapi"),
         "mcp_tools": sorted(EXPECTED_MCP_TOOLS),
+        "mcp_secret_schema_invariant": "PASS",
         "readiness_status": readiness.get("status"),
         "readiness_age_seconds": round(age, 1),
         "x402_payment_state": payment_state,
