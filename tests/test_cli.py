@@ -26,9 +26,12 @@ class CLITests(unittest.TestCase):
             "https://github.com/a/b/issues/1",
         ]
 
-        with patch.object(sys, "argv", argv), contextlib.redirect_stdout(stdout):
-            with self.assertRaises(SystemExit) as exit_context:
-                main()
+        with (
+            patch.object(sys, "argv", argv),
+            contextlib.redirect_stdout(stdout),
+            self.assertRaises(SystemExit) as exit_context,
+        ):
+            main()
 
         self.assertEqual(exit_context.exception.code, 0)
         payload = json.loads(stdout.getvalue())
@@ -52,9 +55,12 @@ class CLITests(unittest.TestCase):
             "https://github.com/a/b",
         ]
 
-        with patch.object(sys, "argv", argv), contextlib.redirect_stdout(stdout):
-            with self.assertRaises(SystemExit) as exit_context:
-                main()
+        with (
+            patch.object(sys, "argv", argv),
+            contextlib.redirect_stdout(stdout),
+            self.assertRaises(SystemExit) as exit_context,
+        ):
+            main()
 
         self.assertEqual(exit_context.exception.code, 0)
 
