@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
 import os
-from typing import Any
 import urllib.error
 import urllib.parse
 import urllib.request
+from dataclasses import dataclass
+from typing import Any
 
 DEFAULT_BASE_URL = "https://preflight.abacore.net"
 DEFAULT_TIMEOUT = 30.0
@@ -34,7 +34,10 @@ class ACNPreflightClient:
         timeout: float = DEFAULT_TIMEOUT,
         access_token: str | None = None,
     ) -> None:
-        configured_base_url = base_url or os.getenv("ACN_PREFLIGHT_BASE_URL", DEFAULT_BASE_URL)
+        configured_base_url = base_url or os.getenv(
+            "ACN_PREFLIGHT_BASE_URL",
+            DEFAULT_BASE_URL,
+        )
         self.base_url = self._normalize_base_url(configured_base_url)
 
         self.timeout = float(timeout)
