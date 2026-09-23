@@ -4,18 +4,35 @@ build-backend = "hatchling.build"
 
 [project]
 name = "acn-preflight"
-version = "0.1.0"
-description = "Python client and MCP server for ACN Preflight"
+version = "0.2.0"
+description = "Deterministic preflight checks for AI agents before external execution"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 authors = [{name = "Abacore"}]
-keywords = ["mcp", "ai-agents", "x402", "github", "preflight"]
+keywords = ["mcp", "ai-agents", "x402", "github", "preflight", "automation"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = ["mcp>=2,<3"]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.2",
+  "ruff>=0.12",
+]
 
 [project.urls]
 Homepage = "https://preflight.abacore.net"
 Repository = "https://github.com/Abacore-net/acn-preflight"
+Issues = "https://github.com/Abacore-net/acn-preflight/issues"
+Changelog = "https://github.com/Abacore-net/acn-preflight/blob/main/CHANGELOG.md"
 
 [project.scripts]
 acn-preflight = "acn_preflight.cli:main"
@@ -23,3 +40,21 @@ acn-preflight-mcp = "acn_preflight.mcp_server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/acn_preflight"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/examples",
+  "/README.md",
+  "/LICENSE",
+  "/CHANGELOG.md",
+  "/SECURITY.md",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
