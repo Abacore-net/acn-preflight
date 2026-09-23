@@ -17,6 +17,7 @@ All notable changes to the public ACN Preflight package are documented here.
 - GitHub issue and pull-request templates;
 - reproducible live contract verification and scheduled public contract checks;
 - public trust and verification documentation, support policy, and CODEOWNERS.
+- five-minute technical evaluator guide for client due diligence.
 
 ### Changed
 
@@ -26,6 +27,7 @@ All notable changes to the public ACN Preflight package are documented here.
 - Apache-2.0 license file replaced with the canonical full text;
 - CLI treats HTTP 402 as an expected structured response while returning nonzero for other HTTP errors;
 - CodeQL workflow upgraded to the current v4 major.
+- package build gate now runs strict Twine distribution metadata validation.
 
 ## 0.1.0 - 2026-09-21
 
