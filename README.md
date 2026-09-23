@@ -8,6 +8,12 @@ Deterministic preflight checks for AI agents before they spend time, money, or e
 
 ACN Preflight is the public integration layer for the hosted Abacore Preflight Engine. It exposes the same decision surfaces through Python, CLI, and Model Context Protocol (MCP), while keeping payment configuration, wallet material, deployment controls, and private operational evidence outside the public repository.
 
+## Evaluate Abacore in five minutes
+
+If you are evaluating Abacore for agent infrastructure, machine-to-machine integrations, or production AI execution, start with the [5-minute technical evaluator guide](docs/evaluator-guide.md).
+
+It walks through the live public contract, reproducible verification, fail-closed behavior, credential boundaries, CI and security controls, and release discipline using evidence you can inspect yourself. The public checks require no account, token, payment, or private access.
+
 ## Live proof
 
 The hosted engine publishes machine-readable discovery and trust surfaces that can be inspected without registration or payment.
