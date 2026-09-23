@@ -6,7 +6,7 @@ import os
 import sys
 
 from . import __version__
-from .client import ACNPreflightClient, ACNPreflightError, DEFAULT_BASE_URL, DEFAULT_TIMEOUT
+from .client import DEFAULT_BASE_URL, DEFAULT_TIMEOUT, ACNPreflightClient, ACNPreflightError
 
 
 def _emit(response) -> int:
