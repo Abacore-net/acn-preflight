@@ -31,8 +31,13 @@ dev = [
 
 [project.urls]
 Homepage = "https://preflight.abacore.net"
+"Live Service" = "https://preflight.abacore.net"
+"OpenAPI 3.1" = "https://preflight.abacore.net/openapi.json"
+"MCP Discovery" = "https://preflight.abacore.net/.well-known/mcp.json"
+"Trust & Verification" = "https://github.com/Abacore-net/acn-preflight/blob/main/docs/trust-and-verification.md"
 Repository = "https://github.com/Abacore-net/acn-preflight"
 Issues = "https://github.com/Abacore-net/acn-preflight/issues"
+Security = "https://github.com/Abacore-net/acn-preflight/blob/main/SECURITY.md"
 Changelog = "https://github.com/Abacore-net/acn-preflight/blob/main/CHANGELOG.md"
 
 [project.scripts]
