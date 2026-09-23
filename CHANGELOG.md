@@ -19,7 +19,8 @@ All notable changes to the public ACN Preflight package are documented here.
 - public trust and verification documentation, support policy, and CODEOWNERS;
 - secure PyPI Trusted Publishing through GitHub OIDC;
 - package metadata links for the live service, OpenAPI, MCP discovery, trust, and security surfaces;
-- package version consistency checks for release metadata.
+- package version consistency checks for release metadata;
+- five-minute technical evaluator guide for client due diligence.
 
 ### Changed
 
@@ -30,7 +31,8 @@ All notable changes to the public ACN Preflight package are documented here.
 - CLI treats HTTP 402 as an expected structured response while returning nonzero for other HTTP errors;
 - CodeQL workflow upgraded to the current v4 major;
 - hosted MCP paid authentication moved to transport-level bearer auth, with access tokens removed from model-visible tool schemas;
-- Live Contract verification now checks the real hosted MCP tool schema and bearer-auth discovery contract.
+- Live Contract verification now checks the real hosted MCP tool schema and bearer-auth discovery contract;
+- package build gate now runs strict Twine distribution metadata validation.
 
 ## 0.1.0 - 2026-09-21
 
