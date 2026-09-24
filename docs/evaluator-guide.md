@@ -9,6 +9,7 @@ The goal is not to ask you to trust a slide deck. The goal is to give you a shor
 Open these public endpoints:
 
 - https://preflight.abacore.net/health
+- https://preflight.abacore.net/docs
 - https://preflight.abacore.net/openapi.json
 - https://preflight.abacore.net/llms.txt
 - https://preflight.abacore.net/.well-known/agent-card.json
@@ -16,7 +17,7 @@ Open these public endpoints:
 - https://preflight.abacore.net/.well-known/x402
 - https://preflight.abacore.net/agent-readiness.json
 
-Together they expose service health, the HTTP contract, agent-facing documentation, provider identity, MCP discovery, payment exposure state, and readiness evidence.
+The `/docs` surface is the human-friendly API reference; `/openapi.json` remains the raw machine-readable OpenAPI 3.1 contract. Together these endpoints expose service health, the HTTP contract, agent-facing documentation, provider identity, MCP discovery, payment exposure state, and readiness evidence.
 
 ## 2. Reproduce the public verification
 
