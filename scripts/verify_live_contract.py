@@ -126,9 +126,22 @@ def verify(base_url: str, timeout: float) -> dict[str, Any]:
     mcp = _json(base_url, "/.well-known/mcp.json", timeout=timeout)
     if not EXPECTED_MCP_TOOLS.issubset(set(mcp.get("tools") or [])):
         raise VerificationError("mcp.json: expected MCP tools are missing")
-    authentication = mcp.get("authentication") or {}
-    if authentication.get("scheme") != "bearer":
-        raise VerificationError("mcp.json: paid MCP authentication must use bearer transport auth")
+    paid_mcp_tools = {"repo_contribution_readiness", "payment_preflight"}
+    payments = mcp.get("payments") or {}
+    if payments.get("protocol") != "x402" or payments.get("version") != 2:
+        raise VerificationError("mcp.json: paid MCP tools must publish x402 v2")
+    if payments.get("network") != "eip155:8453" or payments.get("scheme") != "exact":
+        raise VerificationError("mcp.json: unexpected x402 network or settlement scheme")
+    if not paid_mcp_tools.issubset(set(payments.get("paid_tools") or [])):
+        raise VerificationError("mcp.json: x402 paid tool coverage is incomplete")
+
+    legacy_authentication = mcp.get("legacy_authentication") or {}
+    if legacy_authentication.get("scheme") != "bearer":
+        raise VerificationError("mcp.json: legacy paid access must remain bearer transport auth")
+    if not paid_mcp_tools.issubset(
+        set(legacy_authentication.get("accepted_for") or [])
+    ):
+        raise VerificationError("mcp.json: legacy bearer paid tool coverage is incomplete")
 
     remote_tools = _post_json(
         base_url,
@@ -198,6 +211,7 @@ def verify(base_url: str, timeout: float) -> dict[str, Any]:
         "service": root.get("service"),
         "openapi": openapi.get("openapi"),
         "mcp_tools": sorted(EXPECTED_MCP_TOOLS),
+        "mcp_payment_contract_invariant": "PASS",
         "mcp_secret_schema_invariant": "PASS",
         "readiness_status": readiness.get("status"),
         "readiness_age_seconds": round(age, 1),
