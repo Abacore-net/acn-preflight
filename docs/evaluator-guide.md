@@ -58,7 +58,7 @@ Review:
 - <code>src/acn_preflight/cli.py</code>
 - <code>src/acn_preflight/mcp_server.py</code>
 
-The local MCP integration keeps hosted access tokens outside model-visible arguments. The hosted remote MCP surface is checked independently by the Live Contract workflow and uses transport-level bearer authentication.
+The local MCP integration keeps hosted access tokens outside model-visible arguments. The hosted remote MCP surface is checked independently by the Live Contract workflow: paid tools publish x402 v2 as the primary payment rail, while bearer authentication remains a legacy transport-level fallback. Neither path exposes access tokens as model-visible tool arguments.
 
 ## 5. Inspect engineering and release controls
 
