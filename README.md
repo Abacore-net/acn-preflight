@@ -21,7 +21,8 @@ The hosted engine publishes machine-readable discovery and trust surfaces that c
 | Public surface | Purpose |
 | --- | --- |
 | [Health](https://preflight.abacore.net/health) | Minimal public availability check |
-| [OpenAPI 3.1](https://preflight.abacore.net/openapi.json) | HTTP capability contract |
+| [API Documentation](https://preflight.abacore.net/docs) | Human-friendly interactive API reference |
+| [Raw OpenAPI 3.1](https://preflight.abacore.net/openapi.json) | Machine-readable HTTP capability contract |
 | [llms.txt](https://preflight.abacore.net/llms.txt) | Agent-readable capability guidance |
 | [Agent Card](https://preflight.abacore.net/.well-known/agent-card.json) | Agent and provider identity |
 | [MCP discovery](https://preflight.abacore.net/.well-known/mcp.json) | Published MCP tools |
